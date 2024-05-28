@@ -25,4 +25,8 @@ for (let i = 0; i < buffer.length; i++) {
     buffer[i] = i;
 }
 
-console.log('Modified buffer:', buffer);
+console.log('Modified buffer:', buffer); // Modified buffer: <Buffer 00 01 02 03 04 05 06 07 08 09>
+
+// Converting buffer to hexadecimal string
+const hexString: string = buffer.toString('hex');
+console.log('Buffer as hexadecimal string:', hexString); // Buffer as hexadecimal string: 00010203040506070809
