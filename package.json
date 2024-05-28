@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev EventEmitter.ts",
+    "dev": "ts-node-dev buffers.ts",
     "tsc": "tsc",
-    "start": "node build/EventEmitter.js"
+    "start": "node build/buffers.js"
   },
   "keywords": [],
   "author": "",
