@@ -18,3 +18,11 @@ const dataToWrite: string = 'Hello, world!';
 buffer.write(dataToWrite, 0, 'utf-8');
 
 console.log(buffer); // <Buffer 48 65 6c 6c 6f 2c 20 77 6f 72>
+console.log(buffer.toString("utf-8")); // <Buffer 48 65 6c 6c 6f 2c 20 77 6f 72>
+
+// Manipulating binary data in the buffer
+for (let i = 0; i < buffer.length; i++) {
+    buffer[i] = i;
+}
+
+console.log('Modified buffer:', buffer);
