@@ -5,20 +5,21 @@ import { Buffer } from "buffer";
 const bufSize: number = 10;
 const buffer: Buffer = Buffer.alloc(bufSize);
 
-console.log(buffer); // <Buffer 00 00 00 00 00 00 00 00 00 00>
-console.log(buffer[0]); // 0
+console.log('Initial buffer:', buffer); // <Buffer 00 00 00 00 00 00 00 00 00 00>
+console.log('First byte of buffer:', buffer[0]); // 0
 
+// Allocating a value to a buffer element
 buffer[0] = 0xf4; // allocate 244 (hex) to buffer element 0
 
-console.log(buffer); // <Buffer f4 00 00 00 00 00 00 00 00 00>
-console.log(buffer[0]); // 244
+console.log('Buffer after setting first byte:', buffer); // <Buffer f4 00 00 00 00 00 00 00 00 00>
+console.log('First byte of buffer after setting:', buffer[0]); // 244
 
 // Writing data to the buffer
 const dataToWrite: string = 'Hello, world!';
 buffer.write(dataToWrite, 0, 'utf-8');
 
-console.log(buffer); // <Buffer 48 65 6c 6c 6f 2c 20 77 6f 72>
-console.log(buffer.toString("utf-8")); // <Buffer 48 65 6c 6c 6f 2c 20 77 6f 72>
+console.log('Buffer after writing data:', buffer); // <Buffer 48 65 6c 6c 6f 2c 20 77 6f 72>
+console.log('Buffer content as string:', buffer.toString('utf-8')); // Hello, wor
 
 // Manipulating binary data in the buffer
 for (let i = 0; i < buffer.length; i++) {
