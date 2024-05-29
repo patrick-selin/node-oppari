@@ -48,3 +48,11 @@ console.log('Copied buffer:', copyBuffer); // <Buffer 48 65 6c 6c 6f 2c 20 77 6f
 // Slicing a buffer
 const slicedBuffer: Buffer = stringBuffer.subarray(0, 5);
 console.log('Sliced buffer:', slicedBuffer); // <Buffer 48 65 6c 6c 6f>
+
+// Checking buffer length
+console.log('Length of stringBuffer:', stringBuffer.length); // 13
+
+// Filling a buffer with a value
+const filledBuffer: Buffer = Buffer.alloc(10);
+filledBuffer.fill('A');
+console.log('Filled buffer:', filledBuffer); // <Buffer 41 41 41 41 41 41 41 41 41 41>
