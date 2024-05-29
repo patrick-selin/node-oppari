@@ -31,3 +31,11 @@ console.log('Modified buffer:', buffer); // Modified buffer: <Buffer 00 01 02 03
 // Converting buffer to hexadecimal string
 const hexString: string = buffer.toString('hex');
 console.log('Buffer as hexadecimal string:', hexString); // Buffer as hexadecimal string: 00010203040506070809
+
+// Creating a buffer from an array
+const arrayBuffer: Buffer = Buffer.from([0x1, 0x2, 0x3, 0x4, 0x5]);
+console.log('Buffer from array:', arrayBuffer); // <Buffer 01 02 03 04 05>
+
+// Creating a buffer from a string
+const stringBuffer: Buffer = Buffer.from('Hello, world!', 'utf-8');
+console.log('Buffer from string:', stringBuffer); // <Buffer 48 65 6c 6c 6f 2c 20 77 6f 72 6c 64 21>
