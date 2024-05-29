@@ -62,3 +62,13 @@ const buffer1: Buffer = Buffer.from('Hello ');
 const buffer2: Buffer = Buffer.from('World!');
 const concatenatedBuffer: Buffer = Buffer.concat([buffer1, buffer2]);
 console.log('Concatenated buffer:', concatenatedBuffer.toString('utf-8')); // Hello World!
+
+// Allocating an unsafe buffer
+const unsafeBuffer: Buffer = Buffer.allocUnsafe(10);
+console.log('Unsafe buffer before initialization:', unsafeBuffer); // Uninitialized buffer, may contain old data
+
+// Writing and then reading from the unsafe buffer
+unsafeBuffer.write('Unsafe!', 0, 'utf-8');
+console.log('Unsafe buffer after writing:', unsafeBuffer); // Contains 'Unsafe!'
+const readUnsafeData: string = unsafeBuffer.toString('utf-8', 0, 7);
+console.log('Data read from unsafe buffer:', readUnsafeData); // Unsafe!
