@@ -56,3 +56,9 @@ console.log('Length of stringBuffer:', stringBuffer.length); // 13
 const filledBuffer: Buffer = Buffer.alloc(10);
 filledBuffer.fill('A');
 console.log('Filled buffer:', filledBuffer); // <Buffer 41 41 41 41 41 41 41 41 41 41>
+
+// Concatenating buffers
+const buffer1: Buffer = Buffer.from('Hello ');
+const buffer2: Buffer = Buffer.from('World!');
+const concatenatedBuffer: Buffer = Buffer.concat([buffer1, buffer2]);
+console.log('Concatenated buffer:', concatenatedBuffer.toString('utf-8')); // Hello World!
