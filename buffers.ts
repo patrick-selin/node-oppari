@@ -39,3 +39,12 @@ console.log('Buffer from array:', arrayBuffer); // <Buffer 01 02 03 04 05>
 // Creating a buffer from a string
 const stringBuffer: Buffer = Buffer.from('Hello, world!', 'utf-8');
 console.log('Buffer from string:', stringBuffer); // <Buffer 48 65 6c 6c 6f 2c 20 77 6f 72 6c 64 21>
+
+// Copying buffer data
+const copyBuffer: Buffer = Buffer.alloc(10);
+stringBuffer.copy(copyBuffer, 0, 0, 10);
+console.log('Copied buffer:', copyBuffer); // <Buffer 48 65 6c 6c 6f 2c 20 77 6f 72>
+
+// Slicing a buffer
+const slicedBuffer: Buffer = stringBuffer.subarray(0, 5);
+console.log('Sliced buffer:', slicedBuffer); // <Buffer 48 65 6c 6c 6f>
