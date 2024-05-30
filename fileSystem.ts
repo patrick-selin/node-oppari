@@ -24,11 +24,22 @@ console.log("Synchronous file write complete");
 
 //
 // Appending data asynchronously
-fs.appendFile('output.txt', '\nAppended text', (err) => {
-    if (err) throw err;
-    console.log('Data has been appended');
+fs.appendFile("output.txt", "\nAppended text", (err) => {
+  if (err) throw err;
+  console.log("Data has been appended");
 });
 
 // Appending data synchronously
-fs.appendFileSync('outputSync.txt', '\nAppended text');
-console.log('Synchronous data append complete');
+fs.appendFileSync("outputSync.txt", "\nAppended text");
+console.log("Synchronous data append complete");
+
+//
+// Creating a directory asynchronously
+fs.mkdir("newDir2", (err) => {
+  if (err) throw err;
+  console.log("Directory created");
+});
+
+// Creating a directory synchronously
+fs.mkdirSync("newDirSync");
+console.log("Synchronous directory creation complete");
