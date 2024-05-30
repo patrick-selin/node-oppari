@@ -54,3 +54,24 @@ fs.readdir(".", (err, files) => {
 // Reading directory contents synchronously
 const filesSync = fs.readdirSync(".");
 console.log("Synchronous directory contents:", filesSync);
+
+//
+// Removing a file asynchronously
+fs.unlink('output.txt', (err) => {
+    if (err) throw err;
+    console.log('File removed');
+});
+
+// Removing a file synchronously
+fs.unlinkSync('outputSync.txt');
+console.log('Synchronous file removal complete');
+
+// Removing a directory asynchronously
+fs.rmdir('newDir', (err) => {
+    if (err) throw err;
+    console.log('Directory removed');
+});
+
+// Removing a directory synchronously
+fs.rmdirSync('newDirSync');
+console.log('Synchronous directory removal complete');
