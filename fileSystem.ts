@@ -1,5 +1,6 @@
 import * as fs from "fs";
 
+//
 // Reading a file asynchronously
 fs.readFile("example.txt", "utf8", (err, data) => {
   if (err) throw err;
@@ -20,3 +21,14 @@ fs.writeFile("output.txt", "Hello, Node.js!", (err) => {
 // Writing to a file synchronously
 fs.writeFileSync("outputSync.txt", "Hello, Node.js!");
 console.log("Synchronous file write complete");
+
+//
+// Appending data asynchronously
+fs.appendFile('output.txt', '\nAppended text', (err) => {
+    if (err) throw err;
+    console.log('Data has been appended');
+});
+
+// Appending data synchronously
+fs.appendFileSync('outputSync.txt', '\nAppended text');
+console.log('Synchronous data append complete');
