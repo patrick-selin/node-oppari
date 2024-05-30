@@ -57,21 +57,32 @@ console.log("Synchronous directory contents:", filesSync);
 
 //
 // Removing a file asynchronously
-fs.unlink('output.txt', (err) => {
-    if (err) throw err;
-    console.log('File removed');
+fs.unlink("output.txt", (err) => {
+  if (err) throw err;
+  console.log("File removed");
 });
 
 // Removing a file synchronously
-fs.unlinkSync('outputSync.txt');
-console.log('Synchronous file removal complete');
+fs.unlinkSync("outputSync.txt");
+console.log("Synchronous file removal complete");
 
 // Removing a directory asynchronously
-fs.rmdir('newDir', (err) => {
-    if (err) throw err;
-    console.log('Directory removed');
+fs.rmdir("newDir", (err) => {
+  if (err) throw err;
+  console.log("Directory removed");
 });
 
 // Removing a directory synchronously
-fs.rmdirSync('newDirSync');
-console.log('Synchronous directory removal complete');
+fs.rmdirSync("newDirSync");
+console.log("Synchronous directory removal complete");
+
+//
+// Getting file information asynchronously
+fs.stat("example.txt", (err, stats) => {
+  if (err) throw err;
+  console.log("File stats:", stats);
+});
+
+// Getting file information synchronously
+const statsSync = fs.statSync("example.txt");
+console.log("Synchronous file stats:", statsSync);
