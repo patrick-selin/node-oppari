@@ -43,3 +43,14 @@ fs.mkdir("newDir2", (err) => {
 // Creating a directory synchronously
 fs.mkdirSync("newDirSync");
 console.log("Synchronous directory creation complete");
+
+//
+// Reading directory contents asynchronously
+fs.readdir(".", (err, files) => {
+  if (err) throw err;
+  console.log("Directory contents:", files);
+});
+
+// Reading directory contents synchronously
+const filesSync = fs.readdirSync(".");
+console.log("Synchronous directory contents:", filesSync);
