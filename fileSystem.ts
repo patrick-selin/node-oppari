@@ -86,3 +86,7 @@ fs.stat("example.txt", (err, stats) => {
 // Getting file information synchronously
 const statsSync = fs.statSync("example.txt");
 console.log("Synchronous file stats:", statsSync);
+
+const nodeFunc = (buu)  => {
+    console.log(buu)
+}

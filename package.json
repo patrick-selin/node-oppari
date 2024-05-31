@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev fileSystem.ts",
+    "dev": "ts-node-dev stream1.ts",
     "tsc": "tsc",
-    "start": "node build/fileSystem.js"
+    "start": "node build/stream1.js"
   },
   "keywords": [],
   "author": "",
