@@ -35,3 +35,27 @@ inputStream.pipe(outputStream);
 outputStream.on("finish", () => {
   console.log("Finished piping data");
 });
+
+//
+// Example of a transform stream (converting text to uppercase)
+import { Transform } from "stream";
+
+class UpperCaseTransform extends Transform {
+  _transform(chunk, encoding, callback) {
+    this.push(chunk.toString().toUpperCase());
+    callback();
+  }
+}
+
+// Creating a transform stream
+const upperCaseTransform = new UpperCaseTransform();
+
+// Piping data through the transform stream
+const inputTransformStream = fs.createReadStream("example.txt");
+const outputTransformStream = fs.createWriteStream("transformedOutput.txt");
+inputTransformStream.pipe(upperCaseTransform).pipe(outputTransformStream);
+
+// Handling 'finish' event
+outputTransformStream.on("finish", () => {
+  console.log("Finished transforming data");
+});
