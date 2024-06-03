@@ -99,14 +99,24 @@ const fs = require("node:fs/promises");
       }
     }
 
-    if (!streamWrite.write(chunk)) {
-      streamRead.pause();
-    }
+    nums.forEach((number) => {
+      let n = Number(number);
+
+      if (n % 2 === 0) {
+        if (!streamWrite.write(" " + n + " ")) {
+          streamRead.pause();
+        }
+      }
+    });
 
     console.log(nums);
   });
 
   streamWrite.on("drain", () => {
     streamRead.resume();
+  });
+
+  streamRead.on("end", () => {
+    console.log("Done reading.");
   });
 })();
