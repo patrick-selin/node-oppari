@@ -59,3 +59,10 @@ inputTransformStream.pipe(upperCaseTransform).pipe(outputTransformStream);
 outputTransformStream.on("finish", () => {
   console.log("Finished transforming data");
 });
+
+//
+// Error handling for streams
+const errorStream = fs.createReadStream('nonexistent.txt');
+errorStream.on('error', (err) => {
+    console.error('Error reading file:', err);
+});
