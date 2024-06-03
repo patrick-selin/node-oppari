@@ -81,12 +81,21 @@ const fs = require("node:fs/promises");
 
   const streamWrite = fileHandleWrite.createWriteStream();
 
+  let split = "";
+
   streamRead.on("data", (chunk: Buffer) => {
+    const nums = chunk.toString("utf-8").split("  ");
+
+    if (Number(nums[nums.length - 2]) + 1 !== Number(nums[nums.length - 1])) {
+      split = nums.pop()
+    }
+
     if (!streamWrite.write(chunk)) {
       streamRead.pause();
     }
-    console.log(chunk)
-    console.log(chunk.length)
+    console.log(nums);
+    // console.log(chunk)
+    // console.log(chunk.length)
   });
 
   streamWrite.on("drain", () => {
