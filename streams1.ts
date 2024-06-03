@@ -67,29 +67,29 @@
 //     console.error('Error reading file:', err);
 // });
 
-
 // read many
 const fs = require("node:fs/promises");
 
 (async () => {
   console.time("readBig");
-  const fileHandleRead = await fs.open("text-gigantic.txt", "r");
-  const fileHandleWrite = await fs.open("dest.txt", "w");
+  const fileHandleRead = await fs.open("test.txt", "r");
+  // const fileHandleWrite = await fs.open("dest.txt", "w");
 
   const streamRead = fileHandleRead.createReadStream({
     highWaterMark: 64 * 1024,
   });
-  
-  const streamWrite = fileHandleWrite.createWriteStream();
 
-  streamRead.on("data", (chunk) => {
-    if (!streamWrite.write(chunk)) {
-      streamRead.pause();
-    }
+  // const streamWrite = fileHandleWrite.createWriteStream();
+
+  streamRead.on("data", (chunk: Buffer) => {
+    // if (!streamWrite.write(chunk)) {
+    //   streamRead.pause();
+    // }
+    console.log(chunk)
+    console.log(chunk.length)
   });
 
-  streamWrite.on("drain", () => {
-    streamRead.resume();
-  });
+  // streamWrite.on("drain", () => {
+  //   streamRead.resume();
+  // });
 })();
-
