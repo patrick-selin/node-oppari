@@ -86,16 +86,24 @@ const fs = require("node:fs/promises");
   streamRead.on("data", (chunk: Buffer) => {
     const nums = chunk.toString("utf-8").split("  ");
 
+    if (Number(nums[0]) + 1 !== Number(nums[nums.length - 1])) {
+      if (split) {
+        nums[0] = split.trim() + nums[0].trim();
+      }
+    }
+
     if (Number(nums[nums.length - 2]) + 1 !== Number(nums[nums.length - 1])) {
-      split = nums.pop()
+      const lastNum = nums.pop();
+      if (lastNum !== undefined) {
+        split = lastNum;
+      }
     }
 
     if (!streamWrite.write(chunk)) {
       streamRead.pause();
     }
+
     console.log(nums);
-    // console.log(chunk)
-    // console.log(chunk.length)
   });
 
   streamWrite.on("drain", () => {
