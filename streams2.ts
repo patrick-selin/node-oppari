@@ -1,13 +1,23 @@
+const { pipeline } = require("node:stream");
+const fs = require("node:fs/promises");
+
 (async () => {
   console.time("copy");
 
-  const srcFile = await fs.open("testc.txt", "r");
+  const srcFile = await fs.open("test.txt", "r");
   const destFile = await fs.open("dest.txt", "w");
 
   const readStream = srcFile.createReadStream();
-  const writeStream = destFile. crateWriteStream();
+  const writeStream = destFile. createWriteStream();
 
-  readStream.pipe(writeStream;)
+  readStream.pipe(writeStream);
+  console.log(readStream.readableFlowing);
+
+
+  pipeline(readStream, writeStream, (err: Error) => {
+    console.log(err);
+    console.timeEnd("copy");
+  });
 
 //   let bytesRead = -1;
 
