@@ -1,3 +1,8 @@
 const { Writable } = require("node:stream");
 
-class WriteStream extends Writable {}
+class FileWriteStream extends Writable {
+  constructor({ highWaterMark, filename }) {
+    super({ highWaterMark });
+    this.fileName = fileName;
+  }
+}
