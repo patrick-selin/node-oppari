@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev streams2.ts",
+    "dev": "ts-node-dev customWritable.ts",
     "tsc": "tsc",
-    "start": "node build/streams2.js"
+    "start": "node build/customWritable.js"
   },
   "keywords": [],
   "author": "",
