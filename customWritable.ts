@@ -1,9 +1,15 @@
 const { Writable } = require("node:stream");
-const fs = require("node:fs")
+const fs = require("node:fs");
 
 class FileWriteStream extends Writable {
-    constructor({ highWaterMark, fileName }: { highWaterMark: number; fileName: string }) {
-        super({ highWaterMark });
+  constructor({
+    highWaterMark,
+    fileName,
+  }: {
+    highWaterMark: number;
+    fileName: string;
+  }) {
+    super({ highWaterMark });
 
     this.fileName = fileName;
     this.fd = null;
@@ -11,23 +17,31 @@ class FileWriteStream extends Writable {
     this.chunksSize = 0;
   }
 
-  _construct(callback: (error?: Error) => void) {
+  _construct(
+    callback: (err?: NodeJS.ErrnoException | null, fd?: number) => void
+  ) {
     fs.open(this.fileName, "w", (err, fd) => {
       if (err) {
         callback(err);
       } else {
-        this.fd = fd;
+        this.fd = fd!;
         callback();
       }
     });
   }
 
-  _write(chunk, encoding, callback) {
+  _write(
+    chunk: Buffer,
+    encoding: BufferEncoding,
+    callback: (error?: Error | null) => void
+  ) {
     // fs.write(this.fd, chunk, callback);
-    this.chunks.push(chunk)
+    this.chunks.push(chunk);
     this.chunksSize += chunk.length;
 
-    if (this.chunnkSize)
+    if (this.chunnkSize) {
+      // todo
+    }
   }
 }
 
