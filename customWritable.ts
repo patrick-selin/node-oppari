@@ -80,7 +80,7 @@ class FileWriteStream extends Writable {
     error: NodeJS.ErrnoException | null,
     callback: (error: NodeJS.ErrnoException | null) => void
   ) {
-    console.log("Number of writes:", this.writesCount); // Log number of writes
+    console.log("Number of writes:", this.writesCount);
 
     if (this.fd) {
       fs.close(this.fd, (err: NodeJS.ErrnoException | null) => {
