@@ -88,8 +88,9 @@ class FileWriteStream1   extends Writable {
   console.time("writeMany"); // Start a timer
 
   // Create an instance of FileWriteStream
-  const stream = new FileWriteStream({
-    fileName: "text.txt", // Specify the file name
+  const stream = new FileWriteStream1({
+    highWaterMark: 1800,
+    fileName: "test.txt",
   });
 
   let i = 0; // Initialize a counter variable
