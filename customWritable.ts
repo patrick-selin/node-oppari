@@ -74,6 +74,21 @@ class FileWriteStream extends Writable {
       }
     );
   }
+
+  _destroy(
+    error: NodeJS.ErrnoException | null,
+    callback: (error: NodeJS.ErrnoException | null) => void
+  ) {
+    console.log("Number of writes:", this.writesCount); // Log number of writes
+
+    if (this.fd) {
+      fs.close(this.fd, (err: NodeJS.ErrnoException | null) => {
+        callback(err || error);
+      });
+    } else {
+      callback(error);
+    }
+  }
 }
 
 const stream = new FileWriteStream({
@@ -83,6 +98,9 @@ const stream = new FileWriteStream({
 stream.write(Buffer.from("this is some string"));
 stream.end(Buffer.from("Our last write."));
 
+stream.on("finish", () => {
+    console.log("Stream was finished.");
+  });
 stream.on("drain", () => {
   // todo
 });
