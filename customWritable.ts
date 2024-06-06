@@ -15,19 +15,24 @@ class FileWriteStream extends Writable {
     this.fd = null;
     this.chunks = [];
     this.chunksSize = 0;
+    this.writesCount = 0;
   }
 
   _construct(
     callback: (err?: NodeJS.ErrnoException | null, fd?: number) => void
   ) {
-    fs.open(this.fileName, "w", (err, fd) => {
-      if (err) {
-        callback(err);
-      } else {
-        this.fd = fd!;
-        callback();
+    fs.open(
+      this.fileName,
+      "w",
+      (err: NodeJS.ErrnoException | null | undefined, fd: any) => {
+        if (err) {
+          callback(err);
+        } else {
+          this.fd = fd!;
+          callback();
+        }
       }
-    });
+    );
   }
 
   _write(
@@ -35,12 +40,25 @@ class FileWriteStream extends Writable {
     encoding: BufferEncoding,
     callback: (error?: Error | null) => void
   ) {
-    // fs.write(this.fd, chunk, callback);
     this.chunks.push(chunk);
     this.chunksSize += chunk.length;
 
     if (this.chunnkSize) {
-      // todo
+      fs.write(
+        this.fd,
+        Buffer.concat(this.chunks),
+        (err: Error | null | undefined) => {
+          if (err) {
+            return callback(err);
+          }
+          this.chunks = [];
+          this.chunksSize = 0;
+          ++this.writesCount;
+          callback();
+        }
+      );
+    } else {
+      callback();
     }
   }
 }
