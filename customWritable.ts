@@ -69,6 +69,7 @@ class FileWriteStream extends Writable {
       (err: NodeJS.ErrnoException | null) => {
         if (err) return callback(err);
 
+        ++this.writesCount;
         this.chunks = [];
         callback();
       }
@@ -91,16 +92,42 @@ class FileWriteStream extends Writable {
   }
 }
 
-const stream = new FileWriteStream({
-  highWaterMark: 1800,
-  fileName: "test.txt",
-});
-stream.write(Buffer.from("this is some string"));
-stream.end(Buffer.from("Our last write."));
+(async () => {
+  console.time("writeMany");
 
-stream.on("finish", () => {
-    console.log("Stream was finished.");
+  const stream = new FileWriteStream({
+    highWaterMark: 1800,
+    fileName: "test.txt",
   });
-stream.on("drain", () => {
-  // todo
-});
+
+  let i = 0;
+
+  const numberOfWrites = 1000000;
+
+  const writeMany = () => {
+    while (i < numberOfWrites) {
+      const buff = Buffer.from(` ${i} `, "utf-8");
+
+      if (i === numberOfWrites - 1) {
+        return stream.end(buff);
+      }
+
+      if (!stream.write(buff)) break;
+      i++;
+    }
+  };
+
+  writeMany();
+
+  let d = 0;
+
+  stream.on("drain", () => {
+    ++d;
+    writeMany();
+  });
+
+  stream.on("finish", () => {
+    console.log("Number of drains:", d);
+    console.timeEnd("writeMany");
+  });
+})();
