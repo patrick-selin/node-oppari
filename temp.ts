@@ -3,7 +3,7 @@ const { Writable } = require("node:stream"); // Importing Writable class from th
 const fs = require("node:fs"); // Importing 'fs' module for file system operations
 
 // Custom Writable Stream class definition
-class FileWriteStream extends Writable {
+class FileWriteStream1   extends Writable {
   // Constructor function to initialize the object
   constructor({ highWaterMark, fileName }) {
     super({ highWaterMark }); // Calling parent class constructor (Writable)

@@ -61,6 +61,19 @@ class FileWriteStream extends Writable {
       callback();
     }
   }
+
+  _final(callback: (err?: NodeJS.ErrnoException | null) => void) {
+    fs.write(
+      this.fd,
+      Buffer.concat(this.chunks),
+      (err: NodeJS.ErrnoException | null) => {
+        if (err) return callback(err);
+
+        this.chunks = [];
+        callback();
+      }
+    );
+  }
 }
 
 const stream = new FileWriteStream({
